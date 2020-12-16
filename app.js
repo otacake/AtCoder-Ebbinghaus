@@ -84,9 +84,23 @@ function getAtCoder() {
             }
         }
         console.log(before1week);
-        makeProblemsTable(before1month,"month");
-        makeProblemsTable(before1day,"yesterday");
-        makeProblemsTable(before1week,"week");
+
+        const times = document.AtCoder.times;
+        const num = times.selectedIndex;
+
+        const str = times.options[num].value;
+
+        console.log(str);
+
+        if ( str =="1day") {
+            makeProblemsTable(before1day,"yesterday");
+        }
+        if (str == "1week") {
+            makeProblemsTable(before1week,"week");
+        }
+        if (str == "1month") {
+            makeProblemsTable(before1month,"month");
+        }
     })
 }
 
