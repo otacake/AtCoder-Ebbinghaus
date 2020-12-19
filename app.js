@@ -85,21 +85,20 @@ function getAtCoder() {
         }
         console.log(before1week);
 
-        const times = document.AtCoder.times;
-        const num = times.selectedIndex;
+        var elem = document.getElementById('times');
 
-        const str = times.options[num].value;
+        var until = elem.value;
 
-        console.log(str);
-
-        if ( str =="1day") {
-            makeProblemsTable(before1day,"yesterday");
+        if (until == '1day') {
+            makeProblemsTable(before1day,"problems_list");
         }
-        if (str == "1week") {
-            makeProblemsTable(before1week,"week");
+
+        if (until == '1week') {
+            makeProblemsTable(before1week,"problems_list");
         }
-        if (str == "1month") {
-            makeProblemsTable(before1month,"month");
+
+        if (until == '1month') {
+            makeProblemsTable(before1month,"problems_list");
         }
     })
 }

@@ -18,22 +18,16 @@
         <br><br>
     </div>
     <div class="input">
-        <form name="AtCoder">
-            <font>AtCoder ID</font>
-            <input type="text" placeholder="chokudai" id="id-AtCoder" name="id-AtCoder">
-            <select size="1" name="times">
-                <option value="1day" label="1day" selected>1日</option>
-                <option value="1week" label="1week" >1週間</option>
-                <option value="1month" label="1month">1ヶ月</option>
-            </select>
-            <button type="submit" onclick="getAtCoder()">送信</button>
-        </form>
+        AtCoder ID
+        <input type="text" placeholder="chokudai" id="id-AtCoder" name="id-AtCoder">
+        <select size="1" name="times" id="times">
+            <option value="1day" label="1day" selected>1日</option>
+            <option value="1week" label="1week" >1週間</option>
+            <option value="1month" label="1month">1ヶ月</option>
+        </select>
+        <button type="submit" onclick="getAtCoder()">送信</button>
     </div>
-    <div class="yesterday" id="yesterday">
-    </div>
-    <div class="week" id="week">
-    </div>
-    <div class="month" id="month">
+    <div class="problems_list" id="problems_list">
     </div>
     <script src="./app.js"></script>
 </body>
