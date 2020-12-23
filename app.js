@@ -1,36 +1,3 @@
-function getData() {
-    var table = document.createElement('table');
-    var idols = [["https://www.nogizaka46.com/",22,"2011"],["https://www.hinatazaka46.com/",22,"2019"],["https://sakurazaka46.com/",26,"2020"]];
-    var idolsname = ["乃木坂46","日向坂46","櫻坂46"]
-    var header = ["グループ名","人数","設立年度"];
-    var tr0 = document.createElement('tr');
-    for (var i = 0; i < header.length; i++) {
-        var th = document.createElement('th');
-        th.textContent = header[i];
-        tr0.appendChild(th);
-    }
-    table.appendChild(tr0);
-    for (var i = 0 ;i < idols.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < 3; j++) {
-            var td = document.createElement('td');
-            if (j == 0) {
-                var a = document.createElement('a');
-                a.href = idols[i][j];
-                //td.innerHTML = '<a href="#">' + idolsname[i] + "</a>";
-                td.appendChild(a);
-                elementSetTextContent(a,idolsname[i]);
-                tr.appendChild(td);
-            }
-            else {
-                td.textContent = idols[i][j];
-                tr.appendChild(td);
-            }
-        }
-        table.appendChild(tr);
-    }
-    document.getElementById("yesterday").appendChild(table);
-}
 
 function elementSetTextContent(element,str) {
     if (element.textContent !== undefined) {
@@ -124,7 +91,7 @@ function makeProblemsTable(problems,div_id) {
         }
         console.log(prob_names);
         var tr0 = document.createElement('tr');
-        var header = ['問題名',"結果"];
+        var header = ['問題名',"結果","upsolved"];
         for (var i = 0; i < header.length; i++) {
             var th = document.createElement('th');
             th.textContent = header[i];
@@ -135,7 +102,7 @@ function makeProblemsTable(problems,div_id) {
 
         for (var i = 0; i < keys.length; i++) {
             var tr = document.createElement('tr');
-            for (var j = 0; j < 2; j++) {
+            for (var j = 0; j < 3; j++) {
                 var td = document.createElement('td');
                 if (j == 0) {
                     var a = document.createElement('a');
@@ -148,8 +115,14 @@ function makeProblemsTable(problems,div_id) {
                     tr.appendChild(td);
                     console.log("OK");
                 }
-                else {
+                if (j == 1) {
                     td.textContent = problems[keys[i]][j];
+                    tr.appendChild(td);
+                }
+                if (j == 2) {
+                    var check = document.createElement('input');
+                    check.type = 'checkbox';
+                    td.appendChild(check);
                     tr.appendChild(td);
                 }
             }

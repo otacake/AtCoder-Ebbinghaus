@@ -14,16 +14,16 @@
         AtCoderで解いた問題のうち、エビングハウスの忘却曲線に基づき1日以内、1週間以内、1ヶ月以内
         にnot ACした問題をリストアップします。
         <br>
-        エビングハウスの忘却曲線についての情報は<a href="http://ja.wikipedia.org/w/index.php?curid=149931">こちら</a>
+        エビングハウスの忘却曲線についての情報は<a href="http://ja.wikipedia.org/w/index.php?curid=149931" target="_blank">こちら</a>
         <br><br>
     </div>
     <div class="input">
         AtCoder ID
         <input type="text" placeholder="chokudai" id="id-AtCoder" name="id-AtCoder">
         <select size="1" name="times" id="times">
-            <option value="1day" label="1day" selected>1日</option>
-            <option value="1week" label="1week" >1週間</option>
-            <option value="1month" label="1month">1ヶ月</option>
+            <option value="1day" label="昨日~" selected>1日</option>
+            <option value="1week" label="1週間前~昨日" >1週間</option>
+            <option value="1month" label="1ヶ月前~1週間前">1ヶ月</option>
         </select>
         <button type="submit" onclick="getAtCoder()">送信</button>
     </div>
