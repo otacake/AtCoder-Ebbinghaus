@@ -9,31 +9,31 @@ function elementSetTextContent(element,str) {
 }
 
 function getAtCoder() {
-    var handle = document.getElementById("id-AtCoder").value;
-    var url = "https://kenkoooo.com/atcoder/atcoder-api/results?user="+handle;
-    var now = new Date();
-    var day = 24*60*60;
-    var time_diff = 9*60*60;
-    var today = Math.floor((now.getTime()/1000 + time_diff)/day) * day - time_diff;
-    var yesterday = today  - day;
-    var week = today - 7*day;
-    var month = today - 31*day;
+    let handle = document.getElementById("id-AtCoder").value;
+    const url = "https://kenkoooo.com/atcoder/atcoder-api/results?user="+handle;
+    const now = new Date();
+    const day = 24*60*60;
+    const time_diff = 9*60*60;
+    const today = Math.floor((now.getTime()/1000 + time_diff)/day) * day - time_diff;
+    const yesterday = today  - day;
+    const week = today - 7*day;
+    const month = today - 31*day;
 
-    var before1day = {};
-    var before1week = {};
-    var before1month = {};
+    let before1day = {};
+    let before1week = {};
+    let before1month = {};
 
     fetch(url).then(function(response) {
         return response.json();
     }).then(function(json) {
-        for (var i = 0; i < json.length; i++) {
+        for (let i = 0; i < json.length; i++) {
             if (json[i].result == "AC") {
                 continue;
             }
-            var time = Number(json[i].epoch_second);
-            var id = json[i].problem_id;
-            var result = json[i].result;
-            var con_id = json[i].contest_id;
+            let time = Number(json[i].epoch_second);
+            let id = json[i].problem_id;
+            let result = json[i].result;
+            let con_id = json[i].contest_id;
             if (month <= time  && time < week) {
                 if (before1month[id] == undefined) {
                     before1month[id] = [con_id,result];
@@ -52,9 +52,9 @@ function getAtCoder() {
         }
         console.log(before1week);
 
-        var elem = document.getElementById('times');
+        let elem = document.getElementById('times');
 
-        var until = elem.value;
+        let until = elem.value;
 
         if (until == '1day') {
             makeProblemsTable(before1day,"problems_list");
@@ -71,63 +71,63 @@ function getAtCoder() {
 }
 
 function makeProblemsTable(problems,div_id) {
-    var div = document.getElementById(div_id)
+    let div = document.getElementById(div_id)
     while (div.firstChild) {
         div.removeChild(div.firstChild);
     }
-    var table = document.createElement('table');
-    var url = "https://kenkoooo.com/atcoder/resources/problems.json";
-    var keys = Object.keys(problems);
-    var prob_names = {};
+    let table = document.createElement('table');
+    const url = "https://kenkoooo.com/atcoder/resources/problems.json";
+    let keys = Object.keys(problems);
+    let prob_names = {};
 
     fetch(url).then(function(response) {
         return response.json();
     }).then(function(json) {
-        for (var i = 0; i < json.length; i++) {
-            var id = json[i].id;
+        for (let i = 0; i < json.length; i++) {
+            let id = json[i].id;
             if (keys.includes(id)) {
                 prob_names[id] = json[i].title;
             }
-        }
+        };
         console.log(prob_names);
-        var tr0 = document.createElement('tr');
-        var header = ['問題名',"結果","upsolved"];
-        for (var i = 0; i < header.length; i++) {
-            var th = document.createElement('th');
+        let tr0 = document.createElement('tr');
+        let header = ['問題名',"結果","upsolved"];
+        for (let i = 0; i < header.length; i++) {
+            let th = document.createElement('th');
             th.textContent = header[i];
             tr0.appendChild(th);
-        }
+        };
         table.appendChild(tr0);
         //console.log(keys);
 
-        for (var i = 0; i < keys.length; i++) {
-            var tr = document.createElement('tr');
-            for (var j = 0; j < 3; j++) {
-                var td = document.createElement('td');
+        for (let i = 0; i < keys.length; i++) {
+            let tr = document.createElement('tr');
+            for (let j = 0; j < 3; j++) {
+                let td = document.createElement('td');
                 if (j == 0) {
-                    var a = document.createElement('a');
-                    var pro_url = "https://atcoder.jp/contests/"+problems[keys[i]][j]+"/tasks/"+keys[i];
+                    let a = document.createElement('a');
+                    let pro_url = "https://atcoder.jp/contests/"+problems[keys[i]][j]+"/tasks/"+keys[i];
                     a.href = pro_url;
                     a.target = "_blank";
                     td.appendChild(a);
-                    var prob_name = prob_names[keys[i]];
+                    let prob_name = prob_names[keys[i]];
                     elementSetTextContent(a,prob_name);
                     tr.appendChild(td);
                     console.log("OK");
-                }
+                };
                 if (j == 1) {
                     td.textContent = problems[keys[i]][j];
                     tr.appendChild(td);
-                }
+                };
                 if (j == 2) {
-                    var check = document.createElement('input');
+                    let check = document.createElement('input');
                     check.type = 'checkbox';
                     td.appendChild(check);
                     tr.appendChild(td);
-                }
-            }
+                };
+            };
             table.appendChild(tr);
-        }
+        };
 
         document.getElementById(div_id).appendChild(table);
 
