@@ -8,7 +8,32 @@ function elementSetTextContent(element,str) {
     }
 }
 
+const STORAGE_KEY_HANDLE = "atcoderEbbinghausHandle";
+const STORAGE_KEY_TIME_RANGE = "atcoderEbbinghausTimeRange";
+
+function loadPreferences() {
+    let handleInput = document.getElementById("id-AtCoder");
+    let timeSelect = document.getElementById("times");
+    let storedHandle = localStorage.getItem(STORAGE_KEY_HANDLE);
+    let storedTimeRange = localStorage.getItem(STORAGE_KEY_TIME_RANGE);
+
+    if (storedHandle) {
+        handleInput.value = storedHandle;
+    }
+    if (storedTimeRange) {
+        timeSelect.value = storedTimeRange;
+    }
+}
+
+function savePreferences() {
+    let handle = document.getElementById("id-AtCoder").value;
+    let timeRange = document.getElementById("times").value;
+    localStorage.setItem(STORAGE_KEY_HANDLE, handle);
+    localStorage.setItem(STORAGE_KEY_TIME_RANGE, timeRange);
+}
+
 function getAtCoder() {
+    savePreferences();
     let handle = document.getElementById("id-AtCoder").value;
     const url = "https://kenkoooo.com/atcoder/atcoder-api/results?user="+handle;
     const now = new Date();
@@ -135,3 +160,9 @@ function makeProblemsTable(problems,div_id) {
     })
 
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    loadPreferences();
+    document.getElementById("id-AtCoder").addEventListener("input", savePreferences);
+    document.getElementById("times").addEventListener("change", savePreferences);
+});
